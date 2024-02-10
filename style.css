@@ -1,0 +1,596 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+
+header {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}
+
+.zigzag-gallery {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    max-width: 1200px; /* Set a maximum width for the gallery */
+    margin: 80px auto; /* Center the gallery with margin */
+    padding: 1em; /* Padding around the gallery */
+}
+
+.zigzag-item {
+    display: flex;
+    align-items: center; /* Align video and comments vertically */
+    margin-bottom: 2em; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensures border-radius clips content */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.zigzag-item:nth-child(odd) {
+    flex-direction: row-reverse; /* Reverse order for odd items */
+}
+
+.zigzag-item:nth-child(even) {
+    flex-direction: row; /* Regular order for even items */
+}
+
+.zigzag-item video {
+    flex: 1; /* Flex grow to fill available space */
+    width: 50%; /* Initial width */
+    height: auto;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.zigzag-item video:hover {
+    transform: scale(1.02); /* Slight scale on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+@media (max-width: 768px) {
+    .zigzag-item {
+        flex-direction: column; /* Stack elements on smaller screens */
+    }
+
+    .zigzag-item video {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+
+footer {
+    background-color: #444;
+    color: white;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+.background-video-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.background-video-wrapper iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+
+.gallery-container {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+.gallery {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+.gallery-item {
+    min-width: 100%; /* Each item takes up 100% of the container width */
+    transition: transform 0.3s ease-in-out;
+}
+.gallery-item img {
+    width: 100%; /* Images will fill the width of the `.gallery-item` */
+    height: auto; /* Images will keep their aspect ratio */
+}
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+.prev-button {
+    left: 10px;
+}
+.next-button {
+    right: 10px;
+}
+/* Add this at the end of your existing CSS file to ensure it has precedence */
+
+/* Button base styles */
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    outline: none;
+}
+
+/* Button hover and focus styles */
+.button:hover, .button:focus {
+    background-color: #ffffff;
+    color: #333;
+    opacity: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Specific styles for positioning the buttons */
+.prev-button {
+  
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+/* Ensure these styles are placed after the button base styles to override them */
+/* Animation for sliding in buttons */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateY(-50%) translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateY(-50%) translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.9;
+  }
+}
+
+.prev-button {
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+.next-button {
+    animation: 0.5s ease-out 0s 1 slideInFromRight;
+}
+
+/* Add this to your existing style.css file */
+/* Gallery navigation buttons positioned on the left and right sides */
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+    padding: 0.8rem 1.6rem; /* Padding adjusted to ensure the buttons fit within the viewport */
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0.95; /* Slight transparency */
+    z-index: 10;
+    /* Removed the transform that was causing the button to move partially out of the screen */
+}
+
+.prev-button {
+    left: 10px; /* Adjust the spacing from the left edge of the screen */
+}
+
+.next-button {
+    right: 10px; /* Adjust the spacing from the right edge of the screen */
+}
+
+.prev-button:hover, .next-button:hover {
+    background-color: #333;
+    color: #fff;
+    opacity: 1;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Adding padding to the gallery container to prevent the buttons from being cut off */
+.gallery-container {
+    padding: 0 2%; /* Add padding to ensure buttons don't get cut off */
+    box-sizing: border-box; /* Makes sure padding doesn't increase the width of the container */
+}
+
+/* Gallery item and image styles for centering */
+.gallery-item {
+    /* Ensure gallery item takes up full width and is centered */
+    width: 100%;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.gallery-item img {
+    max-width: 100%;
+    max-height: 80vh; /* Adjust the height to your preference */
+    object-fit: contain; /* Ensure the image is contained within its box without distortion */
+}
+
+
+/* ... (existing global styles) ... */
+
+/* Responsive design adjustments */
+@media only screen and (max-width: 768px) {
+    /* Smaller padding and font sizes for the header */
+    header {
+        padding: 10px 0;
+    }
+
+    header h1 {
+        font-size: 20px; /* Adjust the size as needed */
+    }
+
+    nav ul li a {
+        font-size: 14px; /* Smaller font size for navigation links */
+    }
+
+    /* Adjust hero content for smaller screens */
+    .hero-content h2 {
+        font-size: 24px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    /* Adjust the size and position of the gallery navigation buttons */
+    .button {
+        padding: 8px 16px; /* Smaller buttons */
+        font-size: 12px; /* Smaller text */
+    }
+
+    /* Ensure buttons do not overflow the viewport */
+    .prev-button {
+        left: 5px; /* Closer to the edge */
+    }
+
+    .next-button {
+        right: 5px; /* Closer to the edge */
+    }
+
+    /* Adjust the gallery layout */
+    .gallery-container {
+        width: 95%; /* More width for smaller screens */
+        margin: 60px auto; /* More vertical space */
+    }
+
+    .gallery-item {
+        /* No changes needed here unless you want to adjust margins */
+    }
+
+    .gallery-item img {
+        /* Adjustments to image sizing can be made if needed */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    /* Adjustments for very small screens, like mobile phones */
+    header {
+        padding: 5px 0;
+    }
+
+    header h1 {
+        font-size: 18px; /* Even smaller font size */
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack the navigation links */
+        padding: 0;
+    }
+
+    nav ul li {
+        margin: 5px 0; /* Reduce margin between links */
+    }
+
+    nav ul li a {
+        font-size: 12px; /* Smaller font size for navigation links */
+    }
+
+    /* Further adjustments for the hero section if needed */
+    .hero-section {
+        /* Adjust background video or image sizes and positions here */
+    }
+
+    /* Further button size adjustments for smaller screens */
+    .button {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+
+    /* Footer adjustments */
+    footer {
+        padding: 8px 0;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+}
+
+/* ... (existing specific styles) ... */
+
+/* Remember to clear your browser cache after updating the styles */
+
+/* Add this to your existing style.css file */
+
+.about-section {
+    background-color: #fff; /* Or any other color */
+    padding: 2em;
+    text-align: center;
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.about-text {
+    max-width: 50%;
+}
+
+.about-image img {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%; /* Circular image */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.fun-facts {
+    background-color: #f0f0f0; /* Light background for the section */
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.fun-facts ul {
+    list-style-type: none; /* Removes default list styling */
+    padding: 0;
+}
+
+.fun-facts li {
+    text-align: left;
+    margin-bottom: 0.5em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-text {
+        max-width: 100%;
+    }
+}
+.youtube-popup-content iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* Maintain a 16:9 aspect ratio */
+  border: none; /* Optional: Removes the border around the iframe */
+}
+
+.youtube-popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.youtube-popup-content {
+  background-color: #fff; /* White background */
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Modern shadow */
+              0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 50%; /* Responsive width */
+  max-width: 640px; /* Max width */
+  position: relative; /* Position relative for the close button */
+  transition: all 0.3s; /* Smooth transitions for modern feel */
+}
+
+.close-button {
+  color: #aaa;
+  position: absolute; /* Absolute position relative to the popup content */
+  top: 10px; /* Top position */
+  right: 25px; /* Right position */
+  font-size: 35px; /* Larger close button */
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #333; /* Darker color on hover/focus for better visibility */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .youtube-popup-content {
+    width: 80%; /* More width on smaller screens */
+    margin-top: 20%; /* More top margin on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .youtube-popup-content {
+    width: 95%; /* Almost full width on very small screens */
+    margin-top: 25%; /* More top margin on very small screens */
+  }
+}
+.popup-title {
+    font-size: 24px; /* Adjust the font size as needed */
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Add some space below the title */
+    color: #333; /* Title color */
+    font-weight: normal; /* Font weight can be adjusted as needed */
+}
+
+/* ... existing styles above ... */
+
+/* Responsive adjustments for tablets */
+@media (max-width: 768px) {
+  .youtube-popup-content {
+    width: 80%; /* More width on smaller screens */
+    margin-top: 15%; /* Less top margin on smaller screens */
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  .popup-title {
+    font-size: 20px; /* Slightly smaller font size for smaller screens */
+  }
+
+  .close-button {
+    font-size: 30px; /* Smaller close button for smaller screens */
+    top: 5px;
+    right: 15px;
+  }
+}
+
+/* Responsive adjustments for mobile phones */
+@media (max-width: 480px) {
+  .youtube-popup-content {
+    width: 95%; /* Almost full width on very small screens */
+    margin-top: 10%; /* Less top margin to ensure visibility on small screens */
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  .popup-title {
+    font-size: 18px; /* Even smaller font size for very small screens */
+  }
+
+  .close-button {
+    font-size: 25px; /* Smaller close button for very small screens */
+    top: 5px;
+    right: 10px;
+  }
+}
+.youtube-channel-button {
+    display: inline-block;
+    background-color: #FF0000; /* YouTube's brand color */
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.youtube-channel-button:hover,
+.youtube-channel-button:focus {
+    background-color: #CC0000; /* Darker shade for hover effect */
+}
