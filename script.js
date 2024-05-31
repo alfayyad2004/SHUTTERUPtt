@@ -80,3 +80,4 @@ function closePopup() {
 
 // Trigger to open the popup, for example, when the page loads
 window.onload = openPopup;
+
